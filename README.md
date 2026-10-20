@@ -14,7 +14,7 @@
 
 [![首页](docs/preview.jpg)](https://michuan.github.io/BlueTears/)
 
-<sub>点击图片进入线上站点</sub>
+<sub>点击图片进入线上站点 · 同一份代码部署在 GitHub Pages 与 Cloudflare Pages</sub>
 
 </div>
 
@@ -116,6 +116,13 @@ npx serve .
 
 ## 部署
 
+同一份代码已经部署在两个平台，内容完全一致：
+
+| 平台 | 地址 | 触发方式 |
+| :--- | :--- | :--- |
+| GitHub Pages | <https://michuan.github.io/BlueTears/> | 推送到 `main`，由 Actions 自动发布 |
+| Cloudflare Pages | <https://bluetears.pages.dev/> | 推送即构建，PR 生成预览链接 |
+
 ### GitHub Pages（仓库已配置）
 
 本仓库使用 **GitHub Actions** 部署，工作流见 [`.github/workflows/pages.yml`](./.github/workflows/pages.yml)。流程是：`configure-pages` → 把仓库根目录打包成 artifact → `deploy-pages`。
@@ -141,6 +148,8 @@ git push
 </details>
 
 ### Cloudflare Pages
+
+本仓库已接入，推送即发布到 <https://bluetears.pages.dev/>。若要在自己的账号下重新接一遍：
 
 **连 Git（推荐，推送即部署）**
 
