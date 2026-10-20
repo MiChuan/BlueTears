@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>蓝眼泪 · 追泪指南 | 夜光藻与海萤的蓝色海岸</title>
+<meta name="description" content="蓝眼泪是什么、为什么会发光、什么条件下会出现。含中国海岸十个追泪点位的手绘地图，以及结合水温、风向、潮汐、月相的出现概率模型。">
+<meta name="theme-color" content="#04080e">
+<meta property="og:title" content="蓝眼泪 · 追泪指南">
+<meta property="og:description" content="原理 · 条件 · 手绘地图 · 概率模型 · 图集">
+<meta property="og:type" content="website">
+<link rel="icon" href="./assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="./assets/css/style.css">
+<script>document.documentElement.classList.add('js');</script>
+</head>
+<body>
+
+<div class="progress" id="progress" aria-hidden="true"></div>
+<div class="grain" aria-hidden="true"></div>
+
+<header class="nav" id="nav">
+  <a class="brand" href="#home">
+    <span class="brand-dot" aria-hidden="true"></span>
+    <span class="brand-text">蓝眼泪<em>追泪指南</em></span>
+  </a>
+  <nav class="nav-links" id="navLinks" aria-label="页面导航">
+    <a href="#principle">原理</a>
+    <a href="#conditions">条件</a>
+    <a href="#map">地图</a>
+    <a href="#odds">概率</a>
+    <a href="#gallery">图集</a>
+  </nav>
+  <button class="nav-toggle" id="navToggle" aria-label="打开菜单" aria-expanded="false">
+    <span></span><span></span>
+  </button>
+</header>
+
+<main>
+
+<!-- ============ HERO ============ -->
+<section class="hero" id="home">
+  <div class="hero-media"><img src="./assets/img/wave.jpg" alt="夜色中发着蓝光的海浪" fetchpriority="high"></div>
+  <canvas class="sea-canvas" id="heroCanvas" aria-hidden="true"></canvas>
+  <div class="hero-inner">
+    <p class="eyebrow reveal">中国海岸 · 夜光现象观察手册</p>
+    <h1 class="hero-title">
+      <span style="--i:0">蓝</span><span style="--i:1">眼</span><span style="--i:2">泪</span>
+    </h1>
+    <p class="hero-sub reveal">当海面在你脚下亮起，<br class="m-only">是十万个单细胞生物同时回答了你。</p>
+    <p class="hero-desc reveal">发光原理 · 生成条件 · 十个追泪点位的手绘地图 · 结合风向与天气的出现概率</p>
+    <div class="hero-cta reveal">
+      <a class="btn" href="#principle">开始阅读</a>
+      <a class="btn ghost" href="#odds">算算今晚的概率</a>
+    </div>
+  </div>
+  <div class="hero-foot">
+    <span class="scroll-hint">向下滚动 <i></i></span>
+    <span class="hero-note">示意图 · 数据为经验估算</span>
+  </div>
+</section>
+
+<!-- ============ 01 原理 ============ -->
+<section class="sec" id="principle">
+  <div class="wrap">
+    <header class="sec-head">
+      <span class="sec-num">01</span>
+      <h2>蓝眼泪不是一种生物，<br>而是一场<em>被惊动的发光</em></h2>
+      <p class="lede">海水里漂着数以亿计的微小生物。其中一小部分体内带着一套极其古老的发光装置——当浪、风、船桨、甚至你的脚步把它们「撞」了一下，它们就会把化学能直接变成光。</p>
+    </header>
+
+    <div class="split">
+      <div class="split-media">
+        <div class="glow-panel">
+          <canvas id="touchCanvas" aria-hidden="true"></canvas>
+          <div class="glow-hint">用光标划过 · 或点击海面</div>
+          <div class="glow-tag"><b>机械刺激</b> → 闪光 0.1 秒</div>
+        </div>
+        <p class="cap">示意：夜光藻受到水流剪切力时的瞬时闪光。真实场景中，一整条浪线是成千上万个细胞同时被触发。</p>
+      </div>
+
+      <div class="split-text">
+        <h3>一次不到 0.1 秒的化学反应</h3>
+        <p>发光的主角是两种分子：<b>荧光素</b>（luciferin）和<b>荧光素酶</b>（luciferase）。细胞被搅动时，膜电位瞬间变化，让荧光素在酶的催化下与氧气结合——产物回到基态时放出光子。整个过程几乎不产生热量，所以被称为<b>冷光</b>。</p>
+        <p>放出的光集中在 <b>470–490 纳米</b>，是偏青的蓝。这个「选择」并不浪漫，而是物理上的最优解：海水对红光、黄光的吸收极快，唯独蓝光衰减最少、传得最远；而人眼在暗环境下的敏感峰值在 505 纳米附近。于是深夜里，那点微光恰好落在最容易被你看见的位置。</p>
+
+        <ol class="chain" aria-label="发光过程">
+          <li><b>刺激</b><span>浪 / 风 / 脚步</span></li>
+          <li><b>膜电位变化</b><span>离子通道打开</span></li>
+          <li><b>酶促氧化</b><span>荧光素 + O₂</span></li>
+          <li><b>放光</b><span>≈ 474 nm</span></li>
+          <li><b>传到你眼里</b><span>蓝光衰减最小</span></li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="species">
+      <article class="sp-card">
+        <div class="sp-orb orb-noctiluca" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+        <div class="sp-body">
+          <div class="sp-top">
+            <h3>夜光藻</h3>
+            <span class="sp-latin">Noctiluca scintillans</span>
+          </div>
+          <p class="sp-desc">中国海岸蓝眼泪的<b>第一主角</b>。单细胞甲藻，直径 0.2–2 mm，白天用肉眼就能在海水里看到细小白点。它最擅长的不是「一颗一颗亮」，而是把整条浪线、整片潮头染成流动的蓝。</p>
+          <dl class="sp-meta">
+            <div><dt>发光方式</dt><dd>细胞内囊泡（scintillon）瞬闪</dd></div>
+            <div><dt>峰值波长</dt><dd>约 474 nm 蓝光</dd></div>
+            <div><dt>最适水温</dt><dd>20–25 ℃</dd></div>
+            <div><dt>盛期</dt><dd>福建 4–6 月 / 大连 5–7 月</dd></div>
+            <div><dt>白天线索</dt><dd>海水泛红褐、有腥味（赤潮）</dd></div>
+            <div><dt>代表点位</dt><dd>平潭坛南湾、长江澳</dd></div>
+          </dl>
+        </div>
+      </article>
+
+      <article class="sp-card">
+        <div class="sp-orb orb-ostracod" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+        <div class="sp-body">
+          <div class="sp-top">
+            <h3>海萤</h3>
+            <span class="sp-latin">Vargula hilgendorfii</span>
+          </div>
+          <p class="sp-desc">严格说它<b>不是萤火虫，也不是藻</b>，而是一类介形纲的小甲壳动物，1–3 mm。它把荧光素和酶直接分泌进水里，形成细胞外发光，所以看上去是<b>一颗一颗的蓝色碎星</b>，被踩到才会亮。</p>
+          <dl class="sp-meta">
+            <div><dt>发光方式</dt><dd>分泌到海水中，细胞外发光</dd></div>
+            <div><dt>峰值波长</dt><dd>约 460 nm 蓝光</dd></div>
+            <div><dt>最适水温</dt><dd>20–26 ℃</dd></div>
+            <div><dt>盛期</dt><dd>闽东岛屿 4–6 月</dd></div>
+            <div><dt>观察手感</dt><dd>颗粒感强，像踩碎一地星屑</dd></div>
+            <div><dt>代表点位</dt><dd>连江黄岐、马祖列岛（福建连江）</dd></div>
+          </dl>
+        </div>
+      </article>
+    </div>
+
+    <div class="note">
+      <b>一个容易搞混的点：</b>「蓝眼泪」是<b>现象名</b>，不是物种名。同一片海里可能同时有夜光藻和海萤，甚至加上发光的细菌与介形虫；你在岸边看到的是「哪种」，取决于季节、水温与当场的水团。
+    </div>
+  </div>
+</section>
+
+<!-- ============ 02 条件 ============ -->
+<section class="sec alt" id="conditions">
+  <div class="wrap">
+    <header class="sec-head">
+      <span class="sec-num">02</span>
+      <h2>它为什么今晚出现，<br>明晚就不见了</h2>
+      <p class="lede">蓝眼泪要同时满足两件事：海里<b>本来就有</b>足够多的发光生物（供给），以及它们今夜被<b>推到岸边、聚在一起、并被扰动</b>（呈现）。前者看季节与水团，后者看风、潮、月。</p>
+    </header>
+
+    <div class="cond-grid">
+      <article class="cond">
+        <span class="cond-no">01</span>
+        <h3>水温</h3>
+        <p class="cond-val">20–25 <small>℃ 最适</small></p>
+        <p>夜光藻在 15–28 ℃ 都能存活，20–25 ℃ 繁殖最快。低于 15 ℃ 活性骤降，高于 30 ℃ 受抑制。这也是为什么蓝眼泪随季节由南向北推进。</p>
+      </article>
+      <article class="cond">
+        <span class="cond-no">02</span>
+        <h3>盐度</h3>
+        <p class="cond-val">24–32 <small>‰</small></p>
+        <p>近岸广盐性，但暴雨之后淡水径流会让表层盐度骤降，通常 24–48 小时内「熄灯」。所以<b>大雨当天和次日</b>基本可以放弃。</p>
+      </article>
+      <article class="cond">
+        <span class="cond-no">03</span>
+        <h3>营养盐与上升流</h3>
+        <p class="cond-val">氮 · 磷 <small>富营养</small></p>
+        <p>夜光藻爆发需要充足的氮磷与微量元素。河口、养殖区、上升流活跃的海域更容易形成高密度藻华——这也是它和「水质变差」纠缠不清的原因。</p>
+      </article>
+      <article class="cond">
+        <span class="cond-no">04</span>
+        <h3>风向</h3>
+        <p class="cond-val">向岸风 <small>3–4 级</small></p>
+        <p>最关键的一条。吹向陆地的风（3.4–7.9 m/s）把外海的藻华压向岸边，在潮头堆出一条发光的带子。离岸风会把它们全部带回外海，完全静风则只是水面淡淡一层。</p>
+      </article>
+      <article class="cond">
+        <span class="cond-no">05</span>
+        <h3>潮汐</h3>
+        <p class="cond-val">大潮 · 涨潮</p>
+        <p>农历初一、十五前后潮差最大，涨潮把藻推上岸；退潮后留在湿沙滩上的那一层，被踩一脚会亮成一片。平潮时聚集带最不明显。</p>
+      </article>
+      <article class="cond">
+        <span class="cond-no">06</span>
+        <h3>月光</h3>
+        <p class="cond-val">新月 <small>最佳</small></p>
+        <p>不是亮度变了，是<b>对比度</b>没了。满月的月光会把整个海面照亮，微弱荧光被淹没。农历月初、月末，或月亮在午夜前落下的日子最好。</p>
+      </article>
+      <article class="cond">
+        <span class="cond-no">07</span>
+        <h3>季节</h3>
+        <p class="cond-val">4–6 月 <small>闽粤最盛</small></p>
+        <p>随纬度推迟：广西、广东约 2–5 月，福建 4–6 月（近年 3 月已有），浙江 5–7 月，大连、秦皇岛 5–7 月。台风前后水团剧烈交换，常有意外的爆发。</p>
+      </article>
+      <article class="cond">
+        <span class="cond-no">08</span>
+        <h3>地形与光环境</h3>
+        <p class="cond-val">半封闭海湾</p>
+        <p>C 形湾、口袋湾把漂来的藻「兜」住；缓坡沙滩便于踩出光圈，礁石区浪碎处最亮。同时要<b>远离城市灯光</b>——岸边一排路灯足以毁掉整晚。</p>
+      </article>
+    </div>
+
+    <div class="golden">
+      <span class="golden-label">黄金窗口</span>
+      <p>
+        <b>水温 20–25 ℃</b><i>＋</i><b>向岸风 3–4 级</b><i>＋</i><b>大潮涨潮</b><i>＋</i><b>新月前后</b><i>＋</i><b>晴、无雨</b><i>＋</i><b>半封闭海湾</b>
+      </p>
+      <span class="golden-note">六条同时成立时，闽东、平潭一带的命中率可以很高；缺两条以上，就变成碰运气。</span>
+    </div>
+
+    <div class="warn">
+      <span class="warn-ico" aria-hidden="true">!</span>
+      <div>
+        <b>蓝眼泪不等于好海水。</b>高密度夜光藻本身就是一次赤潮：夜间消耗溶解氧、分泌氨氮，可能造成鱼贝死亡，部分个体还会刺激皮肤与呼吸道。看到大面积赤潮时不要下水、不要游泳，也不要为了拍照往水里扔石头。它更像一封<b>水质的警告信</b>，而不是一张风景明信片。
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 03 地图 ============ -->
+<section class="sec" id="map">
+  <div class="wrap">
+    <header class="sec-head">
+      <span class="sec-num">03</span>
+      <h2>追泪手绘地图<br><em>从辽东一路向南</em></h2>
+      <p class="lede">蓝眼泪的出现跟着水温走：春天从华南、闽粤起，一路北上到渤海。下面这张手绘图按「由北向南」排列十个点位，点击图钉查看每个点的季节、风向与看点。</p>
+    </header>
+
+    <div class="map-layout">
+      <figure class="map-panel">
+        <svg class="handmap" viewBox="0 0 1100 820" role="img" aria-label="中国海岸蓝眼泪点位手绘示意图">
+          <defs>
+            <filter id="wobble" x="-5%" y="-5%" width="110%" height="110%">
+              <feTurbulence type="fractalNoise" baseFrequency="0.012" numOctaves="3" seed="7" result="noise"/>
+              <feDisplacementMap in="SourceGraphic" in2="noise" scale="4.2" xChannelSelector="R" yChannelSelector="G"/>
+            </filter>
+            <filter id="paper" x="0" y="0" width="100%" height="100%">
+              <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="4" seed="3"/>
+              <feColorMatrix type="saturate" values="0"/>
+              <feComponentTransfer><feFuncA type="linear" slope="0.055"/></feComponentTransfer>
+            </filter>
+            <linearGradient id="seaGrad" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#dcebef"/>
+              <stop offset="1" stop-color="#c9e0e6"/>
+            </linearGradient>
+            <linearGradient id="sandGrad" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#f4ead4"/>
+              <stop offset="1" stop-color="#e9dcbf"/>
+            </linearGradient>
+            <radialGradient id="pinGlow" cx="50%" cy="50%" r="50%">
+              <stop offset="0" stop-color="#2fd3ff" stop-opacity=".55"/>
+              <stop offset="1" stop-color="#2fd3ff" stop-opacity="0"/>
+            </radialGradient>
+          </defs>
+
+          <!-- 纸底 -->
+          <rect width="1100" height="820" fill="url(#sandGrad)"/>
+          <rect width="1100" height="820" filter="url(#paper)" opacity=".9"/>
+
+          <!-- 海 -->
+          <path d="M842 46 L812 70 L800 96 L792 128 L806 148 L812 172 L796 196 L786 214 L800 236 L806 258
+                   L782 278 L766 300 L742 322 L726 348 L702 372 L686 398 L656 420 L638 446 L610 470 L592 496
+                   L566 520 L548 546 L518 568 L498 594 L470 618 L444 640 L418 664 L392 686 L366 706 L340 726
+                   L314 746 L288 768 L262 792 L262 820 L1100 820 L1100 46 Z"
+                fill="url(#seaGrad)"/>
+
+          <!-- 海面手绘波纹 -->
+          <g stroke="#9dbfca" stroke-width="1.5" fill="none" opacity=".75" filter="url(#wobble)">
+            <path d="M880 120 q14 -7 28 0 q14 7 28 0"/>
+            <path d="M940 190 q14 -7 28 0 q14 7 28 0"/>
+            <path d="M860 260 q14 -7 28 0 q14 7 28 0"/>
+            <path d="M960 330 q14 -7 28 0 q14 7 28 0"/>
+            <path d="M840 400 q14 -7 28 0 q14 7 28 0"/>
+            <path d="M930 470 q14 -7 28 0 q14 7 28 0"/>
+            <path d="M800 520 q14 -7 28 0 q14 7 28 0"/>
+            <path d="M900 580 q14 -7 28 0 q14 7 28 0"/>
+            <path d="M760 620 q14 -7 28 0 q14 7 28 0"/>
+            <path d="M860 680 q14 -7 28 0 q14 7 28 0"/>
+            <path d="M700 720 q14 -7 28 0 q14 7 28 0"/>
+            <path d="M620 760 q14 -7 28 0 q14 7 28 0"/>
+            <path d="M520 700 q14 -7 28 0 q14 7 28 0"/>
+            <path d="M560 620 q14 -7 28 0 q14 7 28 0"/>
+            <path d="M640 520 q14 -7 28 0 q14 7 28 0"/>
+            <path d="M470 500 q14 -7 28 0 q14 7 28 0"/>
+          </g>
+
+          <!-- 海岸线（描两遍，手绘感） -->
+          <g filter="url(#wobble)">
+            <path d="M842 46 L812 70 L800 96 L792 128 L806 148 L812 172 L796 196 L786 214 L800 236 L806 258
+                     L782 278 L766 300 L742 322 L726 348 L702 372 L686 398 L656 420 L638 446 L610 470 L592 496
+                     L566 520 L548 546 L518 568 L498 594 L470 618 L444 640 L418 664 L392 686 L366 706 L340 726
+                     L314 746 L288 768 L262 792"
+                  fill="none" stroke="#1b3b52" stroke-width="3.2" stroke-linejoin="round" stroke-linecap="round"/>
+            <path d="M850 52 L820 76 L808 100 L800 132 L814 152 L820 176 L804 200 L794 220 L808 240 L814 262
+                     L790 282 L774 304 L750 326 L734 352 L710 376 L694 402 L664 424 L646 450 L618 474 L600 500
+                     L574 524 L556 550 L526 572 L506 598 L478 622 L452 644 L426 668 L400 690 L374 710 L348 730
+                     L322 750 L296 772 L270 796"
+                  fill="none" stroke="#1b3b52" stroke-width="1" opacity=".35"/>
+
+            <!-- 海岸外的点状滩涂（老地图式描点） -->
+            <g transform="translate(15 13)" opacity=".5">
+              <path d="M842 46 L812 70 L800 96 L792 128 L806 148 L812 172 L796 196 L786 214 L800 236 L806 258
+                       L782 278 L766 300 L742 322 L726 348 L702 372 L686 398 L656 420 L638 446 L610 470 L592 496
+                       L566 520 L548 546 L518 568 L498 594 L470 618 L444 640 L418 664 L392 686 L366 706 L340 726
+                       L314 746 L288 768 L262 792"
+                    fill="none" stroke="#5b8ba0" stroke-width="3.4" stroke-dasharray="1 9" stroke-linecap="round"/>
+            </g>
+
+            <!-- 内陆手绘山峦 -->
+            <g stroke="#a8b98c" stroke-width="2" fill="none" opacity=".85">
+              <path d="M180 150 l22 -26 l20 26"/><path d="M212 156 l26 -32 l24 32"/>
+              <path d="M120 330 l20 -24 l18 24"/><path d="M150 336 l24 -28 l22 28"/>
+              <path d="M210 470 l18 -22 l16 22"/>
+              <path d="M140 600 l20 -24 l18 24"/><path d="M172 606 l24 -28 l22 28"/>
+              <path d="M240 700 l18 -20 l16 20"/>
+            </g>
+
+            <!-- 岛屿 -->
+            <g fill="none" stroke="#1b3b52" stroke-width="2" opacity=".8">
+              <ellipse cx="712" cy="418" rx="16" ry="9"/>
+              <ellipse cx="736" cy="440" rx="9" ry="5.5"/>
+              <ellipse cx="692" cy="442" rx="7" ry="4.5"/>
+              <ellipse cx="552" cy="552" rx="20" ry="10"/>
+              <ellipse cx="392" cy="690" rx="13" ry="7"/>
+              <ellipse cx="300" cy="766" rx="15" ry="8"/>
+            </g>
+          </g>
+
+          <!-- 经纬感点阵 -->
+          <g fill="#1b3b52" opacity=".08">
+            <circle cx="100" cy="100" r="2"/><circle cx="100" cy="200" r="2"/><circle cx="100" cy="300" r="2"/>
+            <circle cx="100" cy="400" r="2"/><circle cx="100" cy="500" r="2"/><circle cx="100" cy="600" r="2"/>
+            <circle cx="100" cy="700" r="2"/><circle cx="200" cy="100" r="2"/><circle cx="200" cy="200" r="2"/>
+            <circle cx="200" cy="300" r="2"/><circle cx="200" cy="400" r="2"/><circle cx="200" cy="500" r="2"/>
+            <circle cx="200" cy="600" r="2"/><circle cx="200" cy="700" r="2"/>
+          </g>
+
+          <!-- 省区手写标注 -->
+          <g class="prov" fill="#6d8a63" font-family="KaiTi, STKaiti, '楷体', serif" font-size="24" text-anchor="middle" opacity=".92">
+            <text x="734" y="128" transform="rotate(-52 734 128)">辽宁</text>
+            <text x="712" y="228" transform="rotate(-52 712 228)">河北</text>
+            <text x="718" y="292" transform="rotate(-52 718 292)">山东</text>
+            <text x="642" y="350" transform="rotate(-52 642 350)">江苏</text>
+            <text x="588" y="428" transform="rotate(-52 588 428)">浙江</text>
+            <text x="502" y="508" transform="rotate(-52 502 508)">福建</text>
+            <text x="356" y="652" transform="rotate(-52 356 652)">广东</text>
+            <text x="206" y="772" transform="rotate(-52 206 772)" font-size="21">广西</text>
+          </g>
+
+          <!-- 海域标注 -->
+          <g fill="#87b0be" font-family="KaiTi, STKaiti, '楷体', serif" font-size="36" opacity=".62" letter-spacing="8">
+            <text x="946" y="356">黄海</text>
+            <text x="896" y="486">东海</text>
+            <text x="836" y="706">南海</text>
+          </g>
+
+          <!-- 标题题签 -->
+          <g class="cartouche">
+            <text x="64" y="86" font-family="KaiTi, STKaiti, '楷体', serif" font-size="40" fill="#1b3b52" letter-spacing="8">追泪手绘地图</text>
+            <path d="M64 100 L390 100" stroke="#1b3b52" stroke-width="2.4"/>
+            <path d="M64 108 L330 108" stroke="#1b3b52" stroke-width="1" opacity=".6"/>
+            <text x="66" y="134" font-family="ui-monospace, monospace" font-size="11.5" fill="#8b9aa4" letter-spacing="3">BLUE TEARS HUNTING MAP / CHINA COAST</text>
+            <text x="66" y="158" font-family="KaiTi, STKaiti, '楷体', serif" font-size="15" fill="#a3714f">示意图 · 非等比 · 仅表示点位相对位置与先后顺序</text>
+          </g>
+
+          <!-- 图例 -->
+          <g class="legend" font-family="KaiTi, STKaiti, '楷体', serif" font-size="17" fill="#1b3b52">
+            <rect x="62" y="586" width="252" height="146" fill="none" stroke="#1b3b52" stroke-width="1.4" opacity=".5"/>
+            <text x="78" y="614" font-size="18" letter-spacing="3">图 例</text>
+            <circle cx="90" cy="642" r="7" fill="#c0442f"/>
+            <text x="108" y="648">核心点位（高概率）</text>
+            <circle cx="90" cy="672" r="7" fill="none" stroke="#1b3b52" stroke-width="2"/>
+            <text x="108" y="678">一般点位（看运气）</text>
+            <path d="M80 702 H100" stroke="#c0442f" stroke-width="2" stroke-dasharray="5 4"/>
+            <text x="108" y="708">追泪路线（由北向南）</text>
+          </g>
+
+          <!-- 指北针 -->
+          <g class="compass" transform="translate(1010 96)">
+            <circle r="30" fill="none" stroke="#1b3b52" stroke-width="1.4" opacity=".55"/>
+            <path d="M0 -24 L9 8 L0 2 L-9 8 Z" fill="#1b3b52"/>
+            <text x="0" y="-34" text-anchor="middle" font-family="KaiTi, serif" font-size="14" fill="#1b3b52">北</text>
+          </g>
+
+          <!-- 路线 -->
+          <path class="route" d="M830 108 L824 208 L834 268 L714 410 L618 508 L574 558 L496 630 L418 676 L366 738 L330 756"
+                fill="none" stroke="#c0442f" stroke-width="2" stroke-dasharray="7 6" opacity=".75"/>
+
+          <!-- 点位 -->
+          <g class="pins" id="mapPins"></g>
+        </svg>
+        <figcaption>手绘示意图，仅用于表达点位的相对位置与季节顺序；不表示行政区划边界，不可用于导航。</figcaption>
+      </figure>
+
+      <aside class="map-side">
+        <div class="spot-card" id="spotCard" aria-live="polite"></div>
+        <ul class="spot-list" id="spotList"></ul>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 04 概率 ============ -->
+<section class="sec alt" id="odds">
+  <div class="wrap">
+    <header class="sec-head">
+      <span class="sec-num">04</span>
+      <h2>今晚去，<br>到底能不能看到</h2>
+      <p class="lede">把点位、月份、水温、风向风力、潮汐、月相、天气输进去，模型会按各项条件的贡献算出一个<b>经验命中率</b>。它不是预报，而是把「老师傅的判断」拆成了可以调参数的算式。</p>
+    </header>
+
+    <div class="calc">
+      <form class="controls" id="calcForm" onsubmit="return false">
+        <div class="ctl">
+          <label for="fSpot">点位</label>
+          <select id="fSpot"></select>
+        </div>
+
+        <div class="ctl">
+          <label for="fMonth">月份 <output id="oMonth">5 月</output></label>
+          <input type="range" id="fMonth" min="1" max="12" step="1" value="5">
+          <div class="ticks"><span>1</span><span>4</span><span>7</span><span>10</span><span>12</span></div>
+        </div>
+
+        <div class="ctl">
+          <label for="fTemp">海水温度 <output id="oTemp">23 ℃</output></label>
+          <input type="range" id="fTemp" min="5" max="32" step="1" value="23">
+        </div>
+
+        <div class="ctl">
+          <label>风向 <small>吹向陆地的风最好</small></label>
+          <div class="windrose" id="windRose" role="group" aria-label="风向选择"></div>
+        </div>
+
+        <div class="ctl">
+          <label for="fLevel">风力 <output id="oLevel">3 级</output></label>
+          <input type="range" id="fLevel" min="0" max="6" step="1" value="3">
+        </div>
+
+        <div class="ctl-row">
+          <div class="ctl">
+            <label for="fTide">潮汐</label>
+            <select id="fTide">
+              <option value="bigFlow">大潮 · 涨潮</option>
+              <option value="bigEbb">大潮 · 退潮</option>
+              <option value="smallFlow">小潮 · 涨潮</option>
+              <option value="slack">平潮</option>
+              <option value="smallEbb">小潮 · 退潮</option>
+            </select>
+          </div>
+          <div class="ctl">
+            <label for="fMoon">月相</label>
+            <select id="fMoon">
+              <option value="new">新月前后</option>
+              <option value="quarter" selected>上下弦月</option>
+              <option value="full">满月</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="ctl-row">
+          <div class="ctl">
+            <label for="fSky">天况</label>
+            <select id="fSky">
+              <option value="clear">晴</option>
+              <option value="pclear" selected>晴间多云</option>
+              <option value="cloud">多云</option>
+              <option value="overcast">阴</option>
+              <option value="drizzle">小雨</option>
+              <option value="rain">中到大雨</option>
+            </select>
+          </div>
+          <div class="ctl">
+            <label>白天迹象</label>
+            <label class="switch">
+              <input type="checkbox" id="fSign">
+              <span class="switch-ui"></span>
+              <span class="switch-txt">海水泛红褐 / 有腥味</span>
+            </label>
+          </div>
+        </div>
+      </form>
+
+      <div class="result">
+        <div class="gauge-wrap">
+          <svg class="gauge" viewBox="0 0 260 156" aria-hidden="true">
+            <path class="gauge-track" d="M20 138 A110 110 0 0 1 240 138"/>
+            <path class="gauge-fill" id="gaugeFill" d="M20 138 A110 110 0 0 1 240 138"/>
+          </svg>
+          <div class="gauge-read">
+            <b id="probNum">--</b><span>%</span>
+            <em id="probVerdict">计算中</em>
+          </div>
+        </div>
+
+        <div class="result-meta">
+          <span class="pill" id="pillSpot">—</span>
+          <span class="pill ghost" id="pillType">—</span>
+        </div>
+
+        <p class="result-line" id="resultLine"></p>
+
+        <div class="factors" id="factors"></div>
+
+        <div class="tips" id="tips"></div>
+
+        <p class="disclaimer">模型为经验加权估算（权重见下方「模型说明」），不构成气象、海况预报或出行安全建议。现实中藻华分布极不均匀，同一片海湾的两头也可能一明一暗。</p>
+      </div>
+    </div>
+
+    <div class="rank">
+      <h3>各点位典型盛期夜晚的命中率</h3>
+      <p class="rank-sub">统一按「盛期 + 水温 22 ℃ + 风向随机 + 3 级风 + 平潮 + 上弦月 + 晴间多云」计算，用来横向比较点位的先天条件。</p>
+      <div class="rank-list" id="rankList"></div>
+    </div>
+
+    <details class="model">
+      <summary>模型说明：这 100 分是怎么分配的</summary>
+      <div class="model-body">
+        <p>每个点位有一个自身系数 <code>k</code>（0.42–0.87），由藻华强度、海湾形态、灯光干扰等长期因素决定。总分由七项加权求和：</p>
+        <ul>
+          <li><b>季节 25</b>：距该点位盛期的月数，0 个月得满分，每远 1 个月衰减。</li>
+          <li><b>水温 18</b>：落在 20–25 ℃ 得满分，越偏离越低。</li>
+          <li><b>风向 17</b>：与点位最佳向岸风夹角越小分越高（0°满分，45° 约 0.62，90° 约 0.3，180° 接近 0）。</li>
+          <li><b>风力 10</b>：3–4 级最佳；0–1 级扰动不足，5 级开始把藻带打散，≥6 级不建议去。</li>
+          <li><b>潮汐 10</b>：大潮涨潮满分，小潮退潮最低。</li>
+          <li><b>月光 11</b>：新月满分，满月仅 0.18。</li>
+          <li><b>天况 6</b>：晴最好；中到大雨最低（云量本身不坏，坏的是雨后盐度骤降）。</li>
+          <li><b>白天迹象 3</b>：白天看到红褐水色或闻到腥味，说明藻已经在附近。</li>
+        </ul>
+        <p>最终命中率 = <code>总分 × k</code>，上限 92%。</p>
+      </div>
+    </details>
+  </div>
+</section>
+
+<!-- ============ 05 图集 ============ -->
+<section class="sec" id="gallery">
+  <div class="wrap">
+    <header class="sec-head">
+      <span class="sec-num">05</span>
+      <h2>它大概长这样<br><em>八种被看见的方式</em></h2>
+      <p class="lede">同一片海，不同的看法：站在浪里、爬上礁石、飞起无人机、或者干脆潜进水里。点开任意一张看大图。</p>
+    </header>
+
+    <div class="gallery" id="gallery-grid">
+      <figure class="shot tall" data-cap="浪线 · 一整条海岸在发光">
+        <img src="./assets/img/wave.jpg" alt="夜色中发光蓝色浪线的海岸" loading="lazy">
+        <figcaption><b>浪线</b><span>整条潮头被点燃，是最经典的蓝眼泪画面</span></figcaption>
+      </figure>
+      <figure class="shot" data-cap="俯瞰 · 光沿着潮线画出一条河">
+        <img src="./assets/img/aerial.jpg" alt="航拍视角下发光的海岸线" loading="lazy">
+        <figcaption><b>俯瞰</b><span>无人机升到 100 米，才看得出光带的形状</span></figcaption>
+      </figure>
+      <figure class="shot" data-cap="礁石 · 浪碎的瞬间最亮">
+        <img src="./assets/img/rocks.jpg" alt="浪花拍击礁石发出蓝光" loading="lazy">
+        <figcaption><b>礁石</b><span>水流剪切力最强的地方，闪光也最凶</span></figcaption>
+      </figure>
+      <figure class="shot" data-cap="赤脚 · 每一步都是一个光圈">
+        <img src="./assets/img/couple.jpg" alt="两个人站在发光的浅水里" loading="lazy">
+        <figcaption><b>赤脚</b><span>踩下去的那一下，光会从脚印边缘溢出来</span></figcaption>
+      </figure>
+      <figure class="shot wide" data-cap="海湾 · 半封闭地形把光留在岸边">
+        <img src="./assets/img/bay.jpg" alt="俯瞰海湾夜间蓝色光带" loading="lazy">
+        <figcaption><b>海湾</b><span>口袋形海湾把漂来的藻兜住，形成长亮带</span></figcaption>
+      </figure>
+      <figure class="shot" data-cap="微观 · 十万分之一的夜光藻">
+        <img src="./assets/img/macro.jpg" alt="水中悬浮的发光微粒" loading="lazy">
+        <figcaption><b>微观</b><span>每一颗亮点，都是一个单细胞生物</span></figcaption>
+      </figure>
+      <figure class="shot" data-cap="潮线 · 蓝色脚印会被下一个浪抹掉">
+        <img src="./assets/img/footprints.jpg" alt="沙滩上发光的蓝色脚印" loading="lazy">
+        <figcaption><b>潮线</b><span>退潮后的湿沙，是留光最久的画布</span></figcaption>
+      </figure>
+      <figure class="shot portrait" data-cap="栈桥 · 木桩附近水流扰动最多">
+        <img src="./assets/img/pier.jpg" alt="夜晚栈桥旁的蓝色荧光" loading="lazy">
+        <figcaption><b>栈桥</b><span>船只与木桩的扰动，会让光持续亮着</span></figcaption>
+      </figure>
+    </div>
+    <p class="gal-note">以上图像由 AI 生成，用于还原目击场景；真实蓝眼泪的亮度通常更暗、更细碎，需要长曝光才能拍成这样。</p>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <h4>蓝眼泪 · 追泪指南</h4>
+        <p>一个关于冷光、潮汐与耐心的静态知识站。纯前端实现，无后端、无追踪、无外部依赖。</p>
+      </div>
+      <div>
+        <h4>安全提醒</h4>
+        <p>夜间隔滩请注意涨潮时间、礁石湿滑与松软沙地，结伴同行，不要下水、不要站在浪线上拍照。赤潮高发期避免皮肤直接接触高浓度海水。</p>
+      </div>
+      <div>
+        <h4>数据说明</h4>
+        <p>概率为经验加权模型输出，参数参考公开海洋生物学资料与长期观测经验，不代表任何机构预报。点位信息仅供出行参考。</p>
+      </div>
+    </div>
+    <div class="foot-bar">
+      <span>© 2026 蓝眼泪追泪指南</span>
+      <span>Static site · 可直接部署于 GitHub Pages / Cloudflare Pages</span>
+    </div>
+  </div>
+</footer>
+
+<div class="lightbox" id="lightbox" aria-hidden="true" role="dialog" aria-label="图片查看">
+  <button class="lb-close" id="lbClose" aria-label="关闭">✕</button>
+  <button class="lb-prev" id="lbPrev" aria-label="上一张">‹</button>
+  <button class="lb-next" id="lbNext" aria-label="下一张">›</button>
+  <figure class="lb-figure">
+    <img id="lbImg" src="" alt="">
+    <figcaption id="lbCap"></figcaption>
+  </figure>
+</div>
+
+<script src="./assets/js/main.js"></script>
+</body>
+</html>
